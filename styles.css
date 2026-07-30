@@ -13,3 +13,284 @@ Secondary Colors:
 - Pink:       #F16061
 
 */
+
+/*----- RESET -----*/
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*----- BODY -----*/
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #8BD1CB;
+  color: #333333;
+  min-height: 100vh;
+}
+
+/*----- START SCREEN -----*/
+#startScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+#startScreen h1{
+  font-size: 3.5rem;
+  color: #2E9DF7;
+  margin-bottom: 1rem;
+}
+
+#startScreen p{
+  max-width: 500px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/*----- BUTTONS -----*/
+button {
+  background-color: #FFC907;
+  color: #333333;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 14px 28px;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+button:hover{
+  background-color: #FF902A;
+  transform: translateY(-2px);
+}
+
+button:active{
+  transform: scale(0.97);
+}
+
+/*----- GAME SCREEN -----*/
+
+/* hide until Start works */
+#gameScreen {
+  display: none;
+  padding: 2rem;
+}
+
+/*----- HEADER -----*/
+.gameHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #FFFFFF;
+
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+.gameHeader h2{
+  color: #2E9DF7;
+  font-size: 1.3rem;
+}
+
+
+.gameContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+/*----- WATER SOURCE & VILLAGE -----*/
+
+.waterSource,
+.villageWell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  text-align: center;
+}
+
+.icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.waterSource p,
+.villageWell p {
+  font-weight: bold;
+  color: #333333;
+}
+
+/*----- GAME BOARD -----*/
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 10px;
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 12px rgba(0,0,0,.15);
+}
+
+/*----- TILES -----*/
+
+.tile {
+  width: 90px;
+  height: 90px;
+  background-color: #FFFFFF;
+  border: 3px solid #2E9DF7;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tile:hover {
+  background-color: #4FCB53;
+  cursor: pointer;
+  transform: rotate(5deg);
+}
+
+/*----- PIPES -----*/
+.pipe {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  transform-origin: center;
+}
+/* | */
+.pipe.straight::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 70px;
+  background-color: #2E9DF7;
+  left: 25px;
+  top: 0;
+}
+
+/* L */
+.pipe.corner::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 45px;
+  background-color: #2E9DF7;
+  left: 25px;
+  top: 5px;
+}
+.pipe.corner::after {
+  content: "";
+  position: absolute;
+  width: 45px;
+  height: 20px;
+  background-color: #2E9DF7;
+  left: 25px;
+  top: 30px;
+
+}
+
+/* T */
+.pipe.tee::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 65px;
+  background-color: #2E9DF7;
+  left: 25px;
+  top: 5px;
+}
+.pipe.tee::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  background-color: #2E9DF7;
+  left: 5px;
+  top: 30px;
+}
+
+/* + */
+.pipe.cross::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 70px;
+  background-color: #2E9DF7;
+  left: 25px;
+}
+.pipe.cross::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 20px;
+  background-color: #2E9DF7;
+  top: 25px;
+}
+
+/* rotation */
+.pipe {
+  transition: transform .3s ease;
+}
+
+/*----- CONTROLS -----*/
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/*----- RESPONSIVE -----*/
+
+@media (max-width: 768px) {
+  .gameHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .gameContainer {
+    flex-direction: column;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+  }
+
+  .tile {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icon {
+    font-size: 3rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+}

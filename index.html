@@ -3,11 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Game</title>
+    <title>Water Trails</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to the Charity Water Game Prototype</h1>
+    <!-- START SCREEN -->
+    <section id="startScreen">
+      <h1>Water Trails</h1>
+
+      <p>Connect the pipes to help bring clean water to the village well!</p>
+
+      <button id="startBtn">Start Game</button>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <section id="gameScreen">
+      <!-- Header -->
+      <header class="gameHeader">
+        <div class="level">
+          <h2>Level: <span id="levelCount">1</span></h2>
+        </div>
+
+        <div class="moves">
+          <h2>Moves: <span id="moveCount">0</span></h2>
+        </div>
+
+        <div class="score">
+          <h2>Score: <span id="scoreCount">0</span></h2>
+        </div>
+      </header>
+
+      <main class="gameContainer">
+
+        <!--Water Source-->
+        <div class="waterSource">
+          <div class="icon">💧</div>
+          <p>Water Source</p>
+        </div>
+
+        <!-- Pipe Grid -->
+        <section class="board">
+          <div class="tile">
+            <div class="pipe straight"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe corner"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe tee"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe cross"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe straight"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe corner"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe corner"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe straight"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe corner"></div>
+          </div>
+        </section>
+
+        <!-- Village Well -->
+        <div class="villageWell">
+          <div class="icon">🏠</div>
+          <p>Village Well</p>
+        </div>
+      </main>
+      <div class="controls">
+        <button id="flowBtn">Start Flow</button>
+      </div>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
