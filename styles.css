@@ -117,28 +117,6 @@ button:active{
   margin-bottom: 2rem;
 }
 
-/*----- WATER SOURCE & VILLAGE -----*/
-
-.waterSource,
-.villageWell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 150px;
-  text-align: center;
-}
-
-.icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-}
-
-.waterSource p,
-.villageWell p {
-  font-weight: bold;
-  color: #333333;
-}
-
 /*----- GAME BOARD -----*/
 
 .board {
@@ -153,7 +131,6 @@ button:active{
 }
 
 /*----- TILES -----*/
-
 .tile {
   width: 90px;
   height: 90px;
@@ -172,6 +149,14 @@ button:active{
   transform: rotate(5deg);
 }
 
+/* start and end tiles */
+.start,
+.end{
+    background:#FFC907;
+    font-size:2.5rem;
+    cursor:default;
+}
+
 /*----- PIPES -----*/
 .pipe {
   width: 70px;
@@ -179,6 +164,7 @@ button:active{
   position: relative;
   transform-origin: center;
 }
+
 /* | */
 .pipe.straight::before {
   content: "";
@@ -211,44 +197,6 @@ button:active{
 
 }
 
-/* T */
-.pipe.tee::before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 65px;
-  background-color: #2E9DF7;
-  left: 25px;
-  top: 5px;
-}
-.pipe.tee::after {
-  content: "";
-  position: absolute;
-  width: 60px;
-  height: 20px;
-  background-color: #2E9DF7;
-  left: 5px;
-  top: 30px;
-}
-
-/* + */
-.pipe.cross::before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 70px;
-  background-color: #2E9DF7;
-  left: 25px;
-}
-.pipe.cross::after {
-  content: "";
-  position: absolute;
-  width: 70px;
-  height: 20px;
-  background-color: #2E9DF7;
-  top: 25px;
-}
-
 /* rotation */
 .pipe {
   transition: transform .3s ease;
@@ -260,6 +208,18 @@ button:active{
   display: flex;
   justify-content: center;
   gap: 1rem;
+}
+
+/*----- FOOTER -----*/
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+
+  color: white;
+  font-size: 0.95rem;
 }
 
 /*----- RESPONSIVE -----*/

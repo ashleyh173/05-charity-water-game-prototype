@@ -35,32 +35,17 @@
 
       <main class="gameContainer">
 
-        <!--Water Source-->
-        <div class="waterSource">
-          <div class="icon">💧</div>
-          <p>Water Source</p>
-        </div>
-
         <!-- Pipe Grid -->
         <section class="board">
+
+          <div class="tile start">🌊</div>
           <div class="tile">
             <div class="pipe straight"></div>
           </div>
           <div class="tile">
             <div class="pipe corner"></div>
           </div>
-          <div class="tile">
-            <div class="pipe tee"></div>
-          </div>
-          <div class="tile">
-            <div class="pipe cross"></div>
-          </div>
-          <div class="tile">
-            <div class="pipe straight"></div>
-          </div>
-          <div class="tile">
-            <div class="pipe corner"></div>
-          </div>
+
           <div class="tile">
             <div class="pipe corner"></div>
           </div>
@@ -70,17 +55,23 @@
           <div class="tile">
             <div class="pipe corner"></div>
           </div>
+
+          <div class="tile">
+            <div class="pipe corner"></div>
+          </div>
+          <div class="tile">
+            <div class="pipe straight"></div>
+          </div>
+          <div class="tile end">🏠</div>
         </section>
 
-        <!-- Village Well -->
-        <div class="villageWell">
-          <div class="icon">🏠</div>
-          <p>Village Well</p>
-        </div>
       </main>
       <div class="controls">
         <button id="flowBtn">Start Flow</button>
       </div>
+      <footer>
+        <p>Powered by: <strong>charity: water</strong></p>
+      </footer>
     </section>
 
     <script src="script.js"></script>
