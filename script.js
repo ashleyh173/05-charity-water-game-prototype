@@ -35,6 +35,7 @@ const pipeConnections = {
 };
 
 // Game Variables
+// TODO: handle unused pipes and 90/270 for straight pipes
 const levels = [
   {
     // Level 1
@@ -144,15 +145,6 @@ tiles.forEach(function(tile){
   }); 
 });
 
-function rotateConnections(pipe) {
-  return {
-    top: pipe.left,
-    right: pipe.top,
-    bottom: pipe.right,
-    left: pipe.bottom
-  };
-}
-
 // check if the current pipe configuration matches the solution
 function startFlow() {
   console.log("Starting water flow... ");
@@ -170,6 +162,7 @@ function startFlow() {
   endGame(won);
 }
 
+// TODO: update scoring logic, create score screen
 function endGame(won) {
   if (won) {
     score += 100; // TODO: update scoring logic
