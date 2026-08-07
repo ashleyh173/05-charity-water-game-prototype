@@ -10,6 +10,7 @@ const gameScreen = document.getElementById("gameScreen");
 // Buttons
 const startBtn = document.getElementById("startBtn");
 const flowBtn = document.getElementById("flowBtn");
+const resetBtn = document.getElementById("resetBtn");
 
 // Displays
 const levelDisplay = document.getElementById("levelCount");
@@ -48,7 +49,7 @@ const levels = [
       "corner",
       "corner"
     ],
-    solution: [180, 0, 0, 0, 0, 0, 0]
+    solution: [180, null, null, 0, null, null, 0]
   },
   {
     // Level 2
@@ -61,7 +62,7 @@ const levels = [
       "straight",
       "corner"
     ],
-    solution: [90, 180, 0, 0, 0, 0, 0]
+    solution: [90, 180, null, null, 0, null, null]
   },
   {
     layout: [
@@ -94,7 +95,7 @@ loadLevel();
 // === Event Listeners ===
 startBtn.addEventListener("click", startGame);
 flowBtn.addEventListener("click", startFlow);
-
+resetBtn.addEventListener("click", resetLevel);
 
 // === GAME FUNCTIONS ===
 
@@ -130,20 +131,28 @@ function loadLevel() {
 
 // when tile is clicked, rotate 90, update moves
 tiles.forEach(function(tile){ 
-  tile.dataset.rotation = 0; 
-  tile.addEventListener("click", function(){ 
-    let rotation = Number(tile.dataset.rotation); 
-    rotation += 90; 
-    if(rotation >= 360){ 
-      rotation = 0; 
-    } 
-    tile.dataset.rotation = rotation; 
-    tile.querySelector(".pipe").style.transform = `rotate(${rotation}deg)`; 
-    moves++; 
-    updateDisplay(); 
-    console.log("Tile Rotated!"); 
+  const pipe = tile.querySelector(".pipe");
+  // skip start and end tiles
+  if (!pipe) return;
+  tile.dataset.rotation = 0; // initialize rotation value
+  tile.addEventListener("click", function() {
+    let currentRotation = Number(tile.dataset.rotation);
+
+    currentRotation = (currentRotation + 90) % 360; // rotate 90 degrees
+    tile.dataset.rotation = currentRotation; // update rotation value
+    pipe.style.transform = `rotate(${currentRotation}deg)`; // apply rotation to pipe
+
+    moves++;
+    updateDisplay();
   }); 
 });
+
+// restart the current level
+function resetLevel() {
+    loadLevel();
+    console.log("Level reset!");
+}
+
 
 // check if the current pipe configuration matches the solution
 function startFlow() {
@@ -151,13 +160,31 @@ function startFlow() {
   const pipeTiles = document.querySelectorAll(".pipe");
   const currentSolution = levels[level - 1].solution;
   let won = true;
+  
   for (let i = 0; i < pipeTiles.length; i++) {
     const rotation = Number(pipeTiles[i].parentElement.dataset.rotation);
-    console.log("Pipe", i,"Rotation:", rotation,"Expected:", currentSolution[i]);
-    if (rotation != currentSolution[i]) {
-      won = false;
+    const expected = currentSolution[i];
+
+    // Ignore unused pipes
+    if (expected === null) continue;
+    // Check straight pipes
+    if (pipeTiles[i].classList.contains("straight")) {
+        if (expected === 0 || expected === 180) {
+            if (!(rotation === 0 || rotation === 180)) {
+                won = false;
+            }
+        } else {
+            if (!(rotation === 90 || rotation === 270)) {
+                won = false;
+            }
+        }
+    // Check corner pipes
+    } else {
+        if (rotation !== expected) {
+            won = false;
+        }
     }
-  };
+  }
   console.log(won ? "All pipes are correctly oriented!" : "Some pipes are incorrectly oriented.");
   endGame(won);
 }

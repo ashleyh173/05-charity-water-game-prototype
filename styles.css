@@ -202,6 +202,25 @@ button:active{
   transition: transform .3s ease;
 }
 
+/*----- INSTRUCTIONS -----*/
+.instructions {
+  width: 260px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+.instructions h3 {
+  color: #2E9DF7;
+  margin-bottom: 1rem;
+}
+
+.instructions p {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
 /*----- CONTROLS -----*/
 
 .controls {
