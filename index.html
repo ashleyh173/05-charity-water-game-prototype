@@ -9,11 +9,24 @@
 <body>
     <!-- START SCREEN -->
     <section id="startScreen">
-      <h1>Water Trails</h1>
+      <div class="startCard">
+        <div class="startIcon">💧</div>
 
-      <p>Connect the pipes to help bring clean water to the village well!</p>
+        <h1>Water Trails</h1>
 
-      <button id="startBtn">Start Game</button>
+        <p>Connect the pipes to help bring clean water to the village well!</p>
+
+        <div class="difficultyButtons">
+          <button id="easyBtn" data-difficulty="easy">Easy</button>
+          <button id="normalBtn" data-difficulty="normal">Normal</button>
+          <button id="hardBtn" data-difficulty="hard">Hard</button>
+        </div>
+
+        <a href="https://www.charitywater.org/" target="_blank" rel="noopener noreferrer">
+          <img src="img/cw_logo_horizontal.png" alt="charity: water Logo">
+        </a>
+
+      </div>
     </section>
 
     <!-- GAME SCREEN -->
@@ -79,10 +92,29 @@
         <button id="flowBtn">Start Flow</button>
         <button id="resetBtn">Reset</button>
       </div>
+    </section>
 
-      <footer>
-        <p>Powered by: <strong>charity: water</strong></p>
-      </footer>
+    <!-- LEVEL COMPLETION SCREEN -->
+    <section id="completionScreen">
+      <div class="completeCard">
+        <div class="startIcon">🌟</div>
+        <h1>Level Complete!</h1>
+        <div class="levelStats">
+          <p>Level: <span id="completeLevel">0</span></p>
+          <p>Score: <span id="completeScore">0</span></p>
+          <p>Moves: <span id="completeMoves">0</span></p>
+        </div>
+
+        <div class="factCard">
+          <h3>Did You Know?</h3>
+          <p id="factDisplay"></p>
+        </div>
+
+        <div class="completionBtns">
+          <button id="nextBtn">Next Level</button>
+          <button id="homeBtn">Home</button>
+        </div>
+      </div>
     </section>
 
     <script src="script.js"></script>

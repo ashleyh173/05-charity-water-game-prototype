@@ -6,16 +6,25 @@ console.log('JavaScript file is linked correctly.');
 // Screens
 const startScreen = document.getElementById("startScreen");
 const gameScreen = document.getElementById("gameScreen");
+const completionScreen = document.getElementById("completionScreen");
 
 // Buttons
-const startBtn = document.getElementById("startBtn");
+const easyBtn = document.getElementById("easyBtn");
+const normalBtn = document.getElementById("normalBtn");
+const hardBtn = document.getElementById("hardBtn");
 const flowBtn = document.getElementById("flowBtn");
 const resetBtn = document.getElementById("resetBtn");
+const nextBtn = document.getElementById("nextBtn");
+const homeBtn = document.getElementById("homeBtn");
 
 // Displays
 const levelDisplay = document.getElementById("levelCount");
 const moveDisplay = document.getElementById("moveCount");
 const scoreDisplay = document.getElementById("scoreCount");
+const completeLevel = document.getElementById("completeLevel");
+const completeScore = document.getElementById("completeScore");
+const completeMoves = document.getElementById("completeMoves");
+const factDisplay = document.getElementById("factDisplay");
 
 // Game Tiles
 const tiles = document.querySelectorAll(".tile");
@@ -86,24 +95,61 @@ let level = 1;
 let moves = 0;
 let score = 0;
 
+let difficulty = "easy";
+let maxMoves = Infinity;
+
 // === INITIALIZE GAME ===
 gameScreen.style.display = "none";
+completionScreen.style.display = "none";
 updateDisplay();
 loadLevel();
 
 
 // === Event Listeners ===
-startBtn.addEventListener("click", startGame);
 flowBtn.addEventListener("click", startFlow);
 resetBtn.addEventListener("click", resetLevel);
+easyBtn.addEventListener("click", function(){
+    difficulty = "easy";
+    maxMoves = Infinity;
+    startGame();
+});
+
+normalBtn.addEventListener("click", function(){
+    difficulty = "normal";
+    maxMoves = 20;
+    startGame();
+});
+
+hardBtn.addEventListener("click", function(){
+    difficulty = "hard";
+    maxMoves = getMinimumMoves();
+    startGame();
+});
 
 // === GAME FUNCTIONS ===
 
 // switch from start to game screen
 function startGame() {
   startScreen.style.display = "none";
+  completionScreen.style.display = "none";
   gameScreen.style.display = "block";
-  console.log("Game Started")
+  console.log("Game Started");
+}
+
+// minimum moves for each level
+function getMinimumMoves(){
+  // level 1
+  if(level == 1){
+    return 2;
+  }
+  // level 2
+  if(level == 2){
+    return 3;
+  }
+  // level 3
+  if(level == 3){
+    return 9;
+  }
 }
 
 // update level/move/score values
@@ -125,6 +171,10 @@ function loadLevel() {
     // reset rotation style
     pipes[i].style.transform = "rotate(0deg)";
   }
+  // update hard mode max moves based on level
+  if(difficulty === "hard") {
+    maxMoves = getMinimumMoves();
+  }
   moves = 0;
   updateDisplay();
 }
@@ -144,6 +194,32 @@ tiles.forEach(function(tile){
 
     moves++;
     updateDisplay();
+    // max moves check
+    if(moves > maxMoves){
+      // normal gamemode 
+      if(difficulty === "normal"){
+        // if max moves reached -25 points
+        if(score > 0){
+          score -= 25;
+          alert("❌ You reached the move limit! -25 points");
+        // if no points left, just alert user
+        } else {
+          alert("❌ You ran out of moves! Try again.");
+        }
+      // hard gamemode
+      } else if(difficulty === "hard"){
+        // if max moves reached -50 points
+        if(score > 0){
+          score -= 50;
+          alert("❌ You reached the maximum moves! -50 points");
+        // if no points left, just alert user
+        } else {
+          alert("❌ You ran out of moves! Try again.");
+        }
+      }
+      updateDisplay();
+      resetLevel();
+    }
   }); 
 });
 
@@ -152,7 +228,6 @@ function resetLevel() {
     loadLevel();
     console.log("Level reset!");
 }
-
 
 // check if the current pipe configuration matches the solution
 function startFlow() {
@@ -166,21 +241,21 @@ function startFlow() {
     const expected = currentSolution[i];
 
     // Ignore unused pipes
-    if (expected === null) continue;
+    if (expected == null) continue;
     // Check straight pipes
     if (pipeTiles[i].classList.contains("straight")) {
-        if (expected === 0 || expected === 180) {
-            if (!(rotation === 0 || rotation === 180)) {
+        if (expected == 0 || expected == 180) {
+            if (!(rotation == 0 || rotation == 180)) {
                 won = false;
             }
         } else {
-            if (!(rotation === 90 || rotation === 270)) {
+            if (!(rotation == 90 || rotation == 270)) {
                 won = false;
             }
         }
     // Check corner pipes
     } else {
-        if (rotation !== expected) {
+        if (rotation != expected) {
             won = false;
         }
     }
@@ -189,21 +264,62 @@ function startFlow() {
   endGame(won);
 }
 
-// TODO: update scoring logic, create score screen
+
+// handle level completion and display the level complete screen
 function endGame(won) {
-  if (won) {
-    score += 100; // TODO: update scoring logic
-    moves = 0;    // Reset moves for the next level
-    if(level < levels.length){
-      level++;
-      loadLevel();
-    } else {
-      alert("You've completed all levels!🏆");
-      level = 1; // Reset to level 1 for replayability
+  if (won){
+    if(difficulty === "easy") {
+      score += 100;
+    } else if(difficulty === "normal") {
+      score += 200;
+    } else if(difficulty === "hard") {
+      score += 500;
     }
-    alert("Congratulations! You've successfully connected the pipes!🎉\n\nFact: " + facts[Math.floor(Math.random() * facts.length)]);
+
+    completeLevel.textContent = level;
+    completeScore.textContent = score;
+    completeMoves.textContent = moves;
+    factDisplay.textContent =
+        facts[Math.floor(Math.random()*facts.length)];
+
+    gameScreen.style.display = "none";
+    completionScreen.style.display = "flex";
   } else {
-    alert("Game Over! Try again.❌");
+    alert("❌ Some pipes are incorrectly oriented. Please try again!");
   }
-  updateDisplay();
 }
+// === COMPLETION SCREEN BUTTONS ===
+nextBtn.addEventListener("click", function() {
+  completionScreen.style.display = "none";
+  // go to next level
+  if(level < levels.length){
+    level++;
+    loadLevel();
+    gameScreen.style.display = "block";
+  // completed all levels, return to home screen
+  }else{
+    alert("🏆 You completed every level!");
+    level = 1;
+    score = 0;
+    moves = 0;
+    updateDisplay();
+    loadLevel();
+    completionScreen.style.display = "none";
+    gameScreen.style.display = "none";
+    startScreen.style.display = "flex";
+    }
+});
+
+homeBtn.addEventListener("click", function() {
+  // reset values to initial state
+  level = 1;
+  score = 0;
+  moves = 0;
+  // reset display values
+  updateDisplay();
+  loadLevel();
+  // load start screen
+  completionScreen.style.display = "none";
+  gameScreen.style.display = "none";
+  startScreen.style.display = "flex";
+});

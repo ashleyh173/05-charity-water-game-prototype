@@ -23,7 +23,7 @@ Secondary Colors:
 
 /*----- BODY -----*/
 body{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Proxima Nova", "Arial", Helvetica, sans-serif;
   background-color: #8BD1CB;
   color: #333333;
   min-height: 100vh;
@@ -35,23 +35,58 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   min-height: 100vh;
   text-align: center;
   padding: 2rem;
+  background: linear-gradient(135deg, #8BD1CB 0%, #ffffff 100%);
 }
 
-#startScreen h1{
+#startScreen h1 {
   font-size: 3.5rem;
   color: #2E9DF7;
   margin-bottom: 1rem;
 }
 
-#startScreen p{
-  max-width: 500px;
-  font-size: 1.2rem;
+#startScreen p {
+  max-width: 520px;
+  font-size: 1.15rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+  color: #333333;
+}
+
+.startCard {
+  background: #FFFFFF;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: 3px solid #FFC907;
+  max-width: 500px;
+}
+
+.startIcon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.startCard img {
+  display: block;
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+  margin: 2rem auto 0;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.12));
+}
+
+.difficultyButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.difficultyButtons button {
+  min-width: 100px;
 }
 
 /*----- BUTTONS -----*/
@@ -87,6 +122,8 @@ button:active{
 #gameScreen {
   display: none;
   padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #8BD1CB 0%, #ffffff 100%);
 }
 
 /*----- HEADER -----*/
@@ -94,13 +131,12 @@ button:active{
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   background: #FFFFFF;
-
   padding: 1rem 2rem;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: 3px solid #FFC907;
 }
 
 .gameHeader h2{
@@ -120,14 +156,15 @@ button:active{
 /*----- GAME BOARD -----*/
 
 .board {
-    display: grid;
-    grid-template-columns: repeat(3, 90px);
-    grid-template-rows: repeat(3, 90px);
-    gap: 10px;
-    background: #FFFFFF;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 12px rgba(0,0,0,.15);
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  grid-template-rows: repeat(3, 90px);
+  gap: 10px;
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: 3px solid #FFC907;
 }
 
 /*----- TILES -----*/
@@ -207,8 +244,9 @@ button:active{
   width: 260px;
   background: white;
   padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: 3px solid #2E9DF7;
 }
 
 .instructions h3 {
@@ -229,16 +267,71 @@ button:active{
   gap: 1rem;
 }
 
-/*----- FOOTER -----*/
+/*----- LEVEL COMPLETE SCREEN -----*/
 
-footer {
-  width: 100%;
+#completionScreen {
+  display: none;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #8BD1CB 0%, #ffffff 100%);
+}
 
+#completionScreen h1 {
+  color: #2E9DF7;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.completeCard {
+  background: #FFFFFF;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: 3px solid #FFC907;
+  max-width: 420px;
+  width: min(90vw, 420px);
+}
+
+.levelStats,
+.factCard {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  border: 2px solid #2E9DF7;
+}
+
+.levelStats p,
+.factCard p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.factCard h3 {
+  color: #159A48;
+  margin-bottom: 0.5rem;
+}
+
+.completionBtns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+#nextBtn {
+  background-color: #2E9DF7;
   color: white;
-  font-size: 0.95rem;
+}
+
+#homeBtn {
+  background-color: #4FCB53;
+  color: white;
 }
 
 /*----- RESPONSIVE -----*/
