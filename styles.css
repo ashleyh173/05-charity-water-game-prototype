@@ -206,31 +206,31 @@ button:active{
 .pipe.straight::before {
   content: "";
   position: absolute;
-  width: 20px;
-  height: 70px;
+  width: 25px;
+  height: 85px;
   background-color: #2E9DF7;
-  left: 25px;
-  top: 0;
+  left: 20px;
+  top: -8px;
 }
 
 /* L */
 .pipe.corner::before {
   content: "";
   position: absolute;
-  width: 20px;
-  height: 45px;
+  width: 25px;
+  height: 40px;
   background-color: #2E9DF7;
   left: 25px;
-  top: 5px;
+  top: -8px;
 }
 .pipe.corner::after {
   content: "";
   position: absolute;
-  width: 45px;
-  height: 20px;
+  width: 54px;
+  height: 25px;
   background-color: #2E9DF7;
   left: 25px;
-  top: 30px;
+  top: 25px;
 
 }
 
@@ -337,6 +337,15 @@ button:active{
 /*----- RESPONSIVE -----*/
 
 @media (max-width: 768px) {
+  #startScreen {
+    padding: 1rem;
+  }
+
+  .startCard {
+    width: min(100%, 360px);
+    padding: 1.5rem 1.25rem;
+  }
+
   .gameHeader {
     flex-direction: column;
     gap: 0.75rem;
@@ -350,11 +359,29 @@ button:active{
   .board {
     grid-template-columns: repeat(3, 70px);
     grid-template-rows: repeat(3, 70px);
+    padding: 14px;
   }
 
   .tile {
     width: 70px;
     height: 70px;
+  }
+
+  .instructions {
+    width: min(100%, 250px);
+    padding: 1rem;
+    margin: 0 auto;
+  }
+
+  .instructions h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .instructions p {
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+    font-size: 0.92rem;
   }
 
   .icon {
@@ -364,5 +391,35 @@ button:active{
   .controls {
     flex-direction: column;
     align-items: center;
+  }
+
+  .pipe.straight::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 70px;
+    background-color: #2E9DF7;
+    left: 20px;
+    top: 0;
+  }
+
+  .pipe.corner::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 40px;
+    background-color: #2E9DF7;
+    left: 20px;
+    top: 2px;
+  }
+
+  .pipe.corner::after {
+    content: "";
+    position: absolute;
+    width: 45px;
+    height: 25px;
+    background-color: #2E9DF7;
+    left: 20px;
+    top: 25px;
   }
 }
