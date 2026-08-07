@@ -87,9 +87,9 @@ const levels = [
   }
 ];
 const facts = [
-    "Charity: water fact 1",
-    "Charity: water fact 2",
-    "Charity: water fact 3"
+    "Charity: water has funded 209,241 water projects in 29 countries!",
+    "Charity: water has served 21,641,908 people with clean water!",
+    "In November 2015, charity: water started deploying cutting-edge sensors and cloud computing technology to equip local leaders with real-time data!"
 ];
 let level = 1;
 let moves = 0;
